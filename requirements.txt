@@ -11,3 +11,4 @@ spacy
 jupyter
 notebook
 ipykernel
+TA-Lib
