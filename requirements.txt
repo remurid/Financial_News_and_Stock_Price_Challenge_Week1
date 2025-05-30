@@ -5,3 +5,9 @@ seaborn
 scipy
 plotly
 windrose
+scikit-learn
+nltk
+spacy
+jupyter
+notebook
+ipykernel
