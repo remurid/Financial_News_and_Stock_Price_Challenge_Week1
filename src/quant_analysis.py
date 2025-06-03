@@ -4,7 +4,7 @@ Quantitative analysis functions for Task 2: Stock price analysis using TA-Lib an
 import pandas as pd
 import talib
 import matplotlib.pyplot as plt
-import pynance as pn
+import yfinance as yf
 
 class QuantAnalysis:
     @staticmethod
@@ -65,10 +65,35 @@ class QuantAnalysis:
 
     @staticmethod
     def get_pynance_metrics(ticker, start, end):
-        """Fetch financial metrics using PyNance."""
+        """Fetch historical stock data using PyNance's yfinance wrapper as fallback."""
         try:
-            data = pn.data.history(ticker, start, end)
-            return data
+            import pynance as pn
+        except ImportError:
+            print("PyNance is not installed. Please install it to use this feature.")
+            return None
+        try:
+            # Try yfinance fallback if pn.history does not exist
+            if hasattr(pn, 'history'):
+                data = pn.history(ticker, start, end)
+                return data
+            elif hasattr(pn, 'yfinance') and hasattr(pn.yfinance, 'history'):
+                data = pn.yfinance.history(ticker, start, end)
+                return data
+            else:
+                print("PyNance does not have a 'history' method. Please check the documentation or use yfinance directly.")
+                return None
         except Exception as e:
             print(f"Error fetching data from PyNance: {e}")
+            return None
+
+    @staticmethod
+    def fetch_yfinance_data(ticker, start, end):
+        """Fetch historical stock data using yfinance"""
+                 
+    
+        try:
+            data = yf.download(ticker, start=start, end=end)
+            return data
+        except Exception as e:
+            print(f"Error fetching data from yfinance: {e}")
             return None

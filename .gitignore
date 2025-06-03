@@ -13,3 +13,4 @@ __pycache__/
 
 # Virtual environments
 .week1_env/
+.venv312/
