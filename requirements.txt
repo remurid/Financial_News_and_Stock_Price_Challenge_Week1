@@ -1,5 +1,5 @@
 pandas
-numpy
+#numpy
 matplotlib
 seaborn
 scipy
@@ -11,4 +11,6 @@ spacy
 jupyter
 notebook
 ipykernel
-TA-Lib
+pynance
+yfinance
+#TA-Lib
